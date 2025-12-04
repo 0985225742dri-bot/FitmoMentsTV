@@ -1,219 +1,252 @@
-/* =========================================== */
-/* === ESTILOS BASE Y RESPONSIVE === */
-/* =========================================== */
+/* --- CAMBIOS PARA LOGO DE FONDO EN HEADER --- */
 
-* { box-sizing: border-box; margin:0; padding:0; }
-body { font-family: Arial, sans-serif; background:#000; color:#fff; line-height:1.6; }
-header { display:flex; justify-content:space-between; align-items:center; padding:20px; background:#111; position:fixed; width:100%; top:0; z-index:1000; }
-header img { height:50px; }
-nav { display:flex; }
-/* NOTA: Se actualiza el color base de la navegación al color dorado FF C3 00 */
-nav a { color:#FFC300; text-decoration:none; margin-left:20px; font-weight:bold; }
-nav a:hover { color:#fff; }
-.menu-toggle { display:none; flex-direction:column; cursor:pointer; }
-.menu-toggle div { width:25px; height:3px; background:#FFC300; margin:4px 0; transition:0.3s; }
-section { padding:100px 20px 40px 20px; max-width:900px; margin:auto; }
-h1,h2 { color:#FFC300; margin-bottom:20px; }
-.card { background:#111; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
-footer { text-align:center; padding:20px; background:#111; margin-top:40px; }
-
-/* Responsive */
-@media(max-width:768px){
-    nav { display:none; flex-direction:column; width:100%; background:#111; position:absolute; top:70px; left:0; }
-    nav.active { display:flex; }
-    nav a { margin:15px 0; text-align:center; }
-    .menu-toggle { display:flex; }
+/* 1. Establecer la imagen de fondo en el header */
+header {
+    background-image: url('logo.jpg'); /* Usa tu logo como fondo */
+    background-size: cover; /* Asegura que la imagen cubra todo el header */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que se repita */
+    min-height: 250px; /* Hace el header más grande para que el logo sea visible */
+    padding: 20px;
+    color: white; /* Cambia el color del texto a blanco para que se vea sobre el logo */
+    box-shadow: none; /* Elimina la sombra si la había */
+    position: relative; /* Necesario para la posición de los elementos internos */
 }
 
-/* =========================================== */
-/* === ESTILOS DE COMPONENTES FUNCIONALES (Servicios, Rutinas, Contacto) === */
-/* =========================================== */
+/* 2. Ocultar la imagen <img> dentro del header, ya que la usamos como fondo */
+header img {
+    display: none;
+}
 
-/* --- GENERALES / TITULOS NUEVOS --- */
+/* 3. Ajustar la barra de navegación para que se vea bien sobre el fondo oscuro/con imagen */
+nav a {
+    color: white; /* Asegura que los enlaces sean blancos y visibles */
+    text-shadow: 1px 1px 2px black; /* Añade una sombra de texto para mayor legibilidad */
+    border-bottom: 2px solid transparent;
+}
 
-.section-title, .rutinas-title {
-    color: #FFC300; /* Dorado/Amarillo de la marca */
-    font-size: 24px;
+nav a:hover {
+    color: #ff9900;
+    border-bottom: 2px solid #ff9900;
+}
+
+/* 4. Ajustar el menú desplegable (hamburguesa) para que se vea */
+.menu-toggle div {
+    background-color: white; /* Líneas blancas para el menú de hamburguesa */
+}
+
+/* --- ESTILOS ORIGINALES RESTANTES --- */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Asegurarse que la navegación se vea bien en móvil */
+#navbar.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 250px; /* Baja el menú para que no tape el logo de fondo */
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo semi-transparente */
+    z-index: 10;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    nav {
+        display: none;
+    }
+}
+
+/* Estilos de Secciones */
+section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+section h1 {
     margin-bottom: 20px;
-}
-.rutinas-subtitle {
-    color: #CCC;
-    font-size: 14px;
-    margin-bottom: 20px;
+    color: #ff9900; /* Color de acento */
 }
 
-/* ----------------------------------- */
-/* === 1. ESTILOS DE LA SECCIÓN DE SERVICIOS (ACORDEÓN - CON ASPECTO DE BOTÓN) === */
-/* ----------------------------------- */
+/* Estilos de Acordeón (Servicios) */
+#servicios {
+    background-color: #111;
+}
+
+.section-title {
+    color: #ff9900;
+    margin-bottom: 30px;
+}
 
 .servicio-item {
-    margin-bottom: 15px; /* Más espacio entre botones */
+    background-color: #222;
     border-radius: 8px;
-    background-color: transparent; 
-    overflow: hidden; 
+    margin: 15px auto;
+    width: 90%;
+    max-width: 600px;
+    overflow: hidden;
+    text-align: left;
 }
 
-/* Encabezado Clickeable, CON ASPECTO DE BOTÓN */
 .servicio-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
+    padding: 15px;
     cursor: pointer;
-    padding: 18px 25px; 
-    color: white; 
     font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase; 
-    background-color: #1A1A1A; 
-    border: 2px solid #FFC300; /* BORDE DORADO FUERTE */
-    border-radius: 8px; 
-    margin: 0;
+    color: #fff;
+    border-bottom: 1px solid #333;
     transition: background-color 0.3s;
 }
 
-/* Icono de expansión (+ / -) */
 .servicio-header span {
-    font-size: 20px;
-    color: #FFC300; 
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
+    float: right;
+    font-size: 1.2em;
+    transition: transform 0.3s;
 }
 
-/* Contenido de la descripción (Inicialmente oculto) */
+.accordion-toggle:checked + .servicio-header span {
+    transform: rotate(45deg);
+}
+
 .servicio-content {
-    max-height: 0; 
-    padding: 0 25px; 
+    max-height: 0;
+    padding: 0 15px;
     overflow: hidden;
     transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-    background-color: #222; /* Fondo de la descripción */
-    /* Bordes para fusionar con el botón */
-    border-left: 2px solid #FFC300; 
-    border-right: 2px solid #FFC300; 
-    border-bottom: 2px solid #FFC300; 
-    border-top: none; 
-    border-radius: 0 0 8px 8px; /* Solo esquinas inferiores redondeadas */
 }
 
-.servicio-content p {
-    color: #CCC;
-    padding: 10px 0 5px 0;
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
+.accordion-toggle:checked ~ .servicio-content {
+    max-height: 500px; /* Altura suficiente para mostrar contenido */
+    padding: 15px;
 }
 
-/* Estilo para las listas */
+.servicio-content p, .servicio-content ul {
+    margin: 10px 0;
+    color: #ccc;
+}
+
 .servicio-content ul {
-    list-style: disc;
-    color: #CCC;
-    padding-left: 20px;
-    margin: 10px 0 15px 0;
-    font-size: 14px;
-}
-.servicio-content ul li {
-    margin-bottom: 5px;
+    list-style-type: none;
+    padding-left: 0;
 }
 
-/* === LÓGICA DEL ACORDEÓN === */
-
-.accordion-toggle:checked ~ .servicio-header ~ .servicio-content {
-    max-height: 500px; 
-    padding: 10px 25px 15px 25px; 
+.servicio-content ul li::before {
+    content: "💪"; /* Ícono de fuerza */
+    margin-right: 8px;
 }
 
-/* Ajuste: Quitar borde inferior del botón cuando está abierto */
-.accordion-toggle:checked + .servicio-header {
-    background-color: #333; 
-    border-bottom: none;
-    border-radius: 8px 8px 0 0; 
+/* Estilos de Rutinas */
+#rutinas {
+    background-color: #000;
 }
 
-/* Rotar el signo "+" */
-.accordion-toggle:checked ~ .servicio-header span {
-    transform: rotate(45deg); 
-    color: #FF6347;
+.rutinas-section {
+    padding: 20px;
+    background-color: #111;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
 }
 
-/* ----------------------------------- */
-/* === 2. ESTILOS DE LA SECCIÓN DE RUTINAS (Enlaces Directos) === */
-/* ----------------------------------- */
+.rutinas-title {
+    color: #ff9900;
+    margin-bottom: 10px;
+}
+
+.rutinas-subtitle {
+    color: #ccc;
+    margin-bottom: 30px;
+}
 
 .rutina-link {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    margin-bottom: 12px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
     background-color: #333;
-    color: white;
-    border-left: 5px solid #FFC300; /* Barra dorada de marca */
+    color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
     transition: background-color 0.3s;
-}
-
-.rutina-link .icon {
-    font-size: 14px;
-    font-weight: normal;
-    color: #25D366; 
-}
-
-.rutina-link.avanzada .icon {
-    color: #FFC300; 
 }
 
 .rutina-link:hover {
     background-color: #444;
 }
 
-/* ----------------------------------- */
-/* === 3. ESTILOS DE LA SECCIÓN DE CONTACTO (Botones Automáticos) === */
-/* ----------------------------------- */
-
-/* Estilo base de los botones para usabilidad móvil */
-.contacto-btn {
-    display: block;        
-    text-align: center;    
-    padding: 15px 20px;
-    margin-bottom: 15px;   
-    text-decoration: none; 
-    border-radius: 8px;    
-    font-size: 16px;
-    font-weight: bold;
-    transition: opacity 0.3s;
-    /* Ajustes para el bloque de contacto */
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Estilo para la etiqueta/icono dentro del botón */
-.contacto-btn span {
-    color: #FFFFFF;        
-    margin-right: 5px;
+.rutina-link .icon {
     font-weight: normal;
+    color: #ff9900;
 }
 
-/* 1 y 3. Botones de Email/TikTok (Estilo de la marca) */
-.email-btn, .tiktok-btn {
-    background-color: #1A1A1A; 
-    color: #FFC300;           
-    border: 1px solid #FFC300;
+/* Estilos de Contacto */
+#contacto {
+    background-color: #111;
 }
 
-/* 2. Botón de WhatsApp (Verde oficial) */
+.contacto-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.contacto-btn {
+    display: block;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-align: left;
+}
+
+.contacto-btn span {
+    font-weight: normal;
+    margin-right: 5px;
+}
+
+.email-btn {
+    background-color: #d44638; /* Color de Gmail/Email */
+    color: white;
+}
+
 .whatsapp-btn {
-    background-color: #25D366; 
-    color: white;             
+    background-color: #25d366; /* Color de WhatsApp */
+    color: white;
 }
 
-.whatsapp-btn span {
-    color: white; 
+.tiktok-btn {
+    background-color: #000000;
+    color: white;
+    border: 1px solid #fff;
 }
 
-/* Efecto de interacción */
-.contacto-btn:hover {
-    opacity: 0.85; 
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.8em;
 }
