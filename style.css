@@ -1,64 +1,35 @@
-/* --- CAMBIOS PARA LOGO DE FONDO EN HEADER --- */
+/* --- CAMBIOS DE ALTURA Y NAVEGACIÓN (Versión Final) --- */
 
-/* 1. Establecer la imagen de fondo en el header con una capa de color (Overlay) */
+/* 1. Ajuste del HEADER: Reducimos la altura a 200px para que no sea tan dominante. */
 header {
-    /* Agregamos un linear-gradient oscuro semi-transparente para que el texto blanco (navegación) se vea bien sobre cualquier logo. */
+    /* Mantenemos el overlay y el logo de fondo */
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('logo.jpg');
-    background-size: cover; /* Asegura que la imagen cubra todo el header */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que se repita */
-    min-height: 500px; /* Mantenemos la altura grande */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 200px; /* Reducción de 500px a 200px */
     padding: 20px;
-    color: white; /* El texto debe ser blanco */
-    box-shadow: none; /* Elimina la sombra si la había */
-    position: relative; /* Necesario para la posición de los elementos internos */
-    display: flex; /* Usamos flexbox para centrar el contenido */
+    color: white; 
+    box-shadow: none; 
+    position: relative; 
+    display: flex; 
     flex-direction: column;
-    justify-content: space-between; /* Mantiene la navegación arriba y el contenido centrado */
+    justify-content: center; /* Centra el título verticalmente */
     align-items: center;
+    text-align: center;
+    padding-top: 0; /* Eliminamos el padding superior extra, ya que la navegación será parte del header */
 }
 
-/* 2. Estilo del título principal para que se vea bien en el centro del fondo */
+/* 2. Estilo del título principal (que ahora es el "logo" principal en el centro) */
 .header-title {
-    font-size: 3em;
-    font-weight: bold;
+    font-size: 3em; 
+    font-weight: 900;
     color: white;
-    text-shadow: 2px 2px 4px black; /* Sombra para máxima visibilidad */
-    margin-top: 100px; /* Baja un poco el título */
+    text-shadow: 2px 2px 6px black; 
+    margin: 0; 
 }
 
-/* 3. Ocultar la imagen <img> dentro del header (aunque ya la eliminamos del HTML, mantenemos la regla) */
-header img {
-    display: none;
-}
-
-/* 4. Ajustar la barra de navegación y enlaces */
-nav {
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    justify-content: flex-end; /* Alinea los enlaces a la derecha */
-    padding: 10px 0;
-}
-
-nav a {
-    color: white; /* Asegura que los enlaces sean blancos y visibles */
-    text-shadow: 1px 1px 2px black; /* Añade una sombra de texto para mayor legibilidad */
-    border-bottom: 2px solid transparent;
-    margin-left: 20px;
-}
-
-nav a:hover {
-    color: #ff9900;
-    border-bottom: 2px solid #ff9900;
-}
-
-/* 5. Ajustar el menú desplegable (hamburguesa) para que se vea */
-.menu-toggle div {
-    background-color: white; /* Líneas blancas para el menú de hamburguesa */
-}
-
-/* --- ESTILOS ORIGINALES RESTANTES --- */
+/* --- NAVEGACIÓN CLÁSICA (No Fija) y VISIBLE --- */
 
 body {
     font-family: Arial, sans-serif;
@@ -67,25 +38,63 @@ body {
     background-color: #000;
     color: #fff;
     line-height: 1.6;
+    padding-top: 0; /* Quitamos el padding superior, la navegación va dentro del header */
 }
 
-/* Asegurarse que la navegación se vea bien en móvil */
+nav {
+    position: absolute; /* Posiciona la nav en la parte inferior del header */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent; /* Fondo transparente para que el logo de fondo la cubra */
+    box-shadow: none;
+    padding: 10px 20px;
+    z-index: 1000; 
+    display: flex;
+    justify-content: center; /* Centramos los enlaces de la navegación */
+}
+
+nav a {
+    color: white; 
+    text-shadow: 1px 1px 2px black; /* Sombra para que se vean sobre el logo */
+    text-decoration: none;
+    padding: 5px 15px;
+    margin: 0 10px; /* Margen a los lados */
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+    color: #ff9900;
+    border-bottom: 2px solid #ff9900;
+}
+
+/* 3. Estilos para el menú móvil */
+.menu-toggle {
+    display: none;
+    position: absolute;
+    top: 20px; /* Posicionamiento en móvil */
+    right: 20px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
 #navbar.active {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 500px; /* AJUSTADO para que coincida con la nueva altura del header (500px)! */
+    top: 200px; /* Debajo del header (200px) */
     right: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fondo semi-transparente */
-    z-index: 10;
-}
-
-.menu-toggle {
-    display: none;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    background-color: rgba(0, 0, 0, 0.95); 
+    z-index: 1000;
 }
 
 @media (max-width: 768px) {
@@ -93,19 +102,24 @@ body {
         display: block;
     }
     nav {
-        display: none;
+        display: none; /* Ocultamos la nav en móvil hasta que se haga clic en el botón */
         flex-direction: column;
         align-items: center;
+        bottom: auto;
     }
     nav a {
         margin: 10px 0;
     }
     header {
-        align-items: flex-start; /* Alinea el contenido a la izquierda en móvil */
+        min-height: 250px; /* Un poco más de altura en móvil para el título */
+    }
+    #navbar.active {
+        top: 250px; /* Ajustamos la posición de despliegue en móvil */
     }
 }
 
-/* Estilos de Secciones */
+/* --- ESTILOS DE SECCIONES (Resto del código) --- */
+
 section {
     padding: 40px 20px;
     text-align: center;
