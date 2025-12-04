@@ -20,3 +20,178 @@ footer { text-align:center; padding:20px; background:#111; margin-top:40px; }
     nav a { margin:15px 0; text-align:center; }
     .menu-toggle { display:flex; }
 }
+/* =========================================== */
+/* === ESTILOS NUEVOS CONSOLIDADOS === */
+/* =========================================== */
+
+/* --- GENERALES / TITULOS NUEVOS --- */
+
+.section-title, .rutinas-title {
+    color: #FFC300; /* Dorado/Amarillo de la marca */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.rutinas-subtitle {
+    color: #CCC;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+/* ----------------------------------- */
+/* === 1. ESTILOS DE LA SECCIÓN DE SERVICIOS (ACORDEÓN) === */
+/* ----------------------------------- */
+
+.servicio-item {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background-color: #1A1A1A;
+    overflow: hidden; 
+}
+
+/* Encabezado Clickeable */
+.servicio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 20px;
+    color: white; 
+    font-weight: bold;
+    font-size: 16px;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+
+/* Icono de expansión (+ / -) */
+.servicio-header span {
+    font-size: 20px;
+    color: #FFC300; 
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+/* Contenido de la descripción (Inicialmente oculto) */
+.servicio-content {
+    max-height: 0; 
+    padding: 0 20px;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    background-color: #222;
+}
+
+.servicio-content p {
+    color: #CCC;
+    padding: 10px 0 5px 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Estilo para las listas */
+.servicio-content ul {
+    list-style: disc;
+    color: #CCC;
+    padding-left: 20px;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
+}
+.servicio-content ul li {
+    margin-bottom: 5px;
+}
+
+/* === LÓGICA DEL ACORDEÓN === */
+
+.accordion-toggle:checked ~ .servicio-header ~ .servicio-content {
+    max-height: 500px; 
+    padding: 10px 20px 15px 20px;
+}
+
+.accordion-toggle:checked ~ .servicio-header span {
+    transform: rotate(45deg); 
+    color: #FF6347;
+}
+
+/* ----------------------------------- */
+/* === 2. ESTILOS DE LA SECCIÓN DE RUTINAS (Enlaces Directos) === */
+/* ----------------------------------- */
+
+.rutina-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #333;
+    color: white;
+    border-left: 5px solid #FFC300; /* Barra dorada de marca */
+    transition: background-color 0.3s;
+}
+
+.rutina-link .icon {
+    font-size: 14px;
+    font-weight: normal;
+    color: #25D366; /* Verde para resaltar la descarga */
+}
+
+.rutina-link.avanzada .icon {
+    color: #FFC300; /* Dorado para el botón de contacto */
+}
+
+.rutina-link:hover {
+    background-color: #444;
+}
+
+/* ----------------------------------- */
+/* === 3. ESTILOS DE LA SECCIÓN DE CONTACTO (Botones Automáticos) === */
+/* ----------------------------------- */
+
+/* Estilo base de los botones para usabilidad móvil */
+.contacto-btn {
+    display: block;        
+    text-align: center;    
+    padding: 15px 20px;
+    margin-bottom: 15px;   
+    text-decoration: none; 
+    border-radius: 8px;    
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.3s;
+    /* Ajustes para el bloque de contacto */
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilo para la etiqueta/icono dentro del botón */
+.contacto-btn span {
+    color: #FFFFFF;        
+    margin-right: 5px;
+    font-weight: normal;
+}
+
+/* 1 y 3. Botones de Email/TikTok (Estilo de la marca) */
+.email-btn, .tiktok-btn {
+    background-color: #1A1A1A; 
+    color: #FFC300;           
+    border: 1px solid #FFC300;
+}
+
+/* 2. Botón de WhatsApp (Verde oficial) */
+.whatsapp-btn {
+    background-color: #25D366; 
+    color: white;             
+}
+
+.whatsapp-btn span {
+    color: white; 
+}
+
+/* Efecto de interacción */
+.contacto-btn:hover {
+    opacity: 0.85; 
+}
